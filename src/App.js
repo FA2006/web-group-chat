@@ -1,14 +1,12 @@
-import './App.css';
 import Navbar from './Navbar';
+import Home from './home';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="chat-group">
-        <div className="chat-message">
-          <h1>Hello, world!</h1>
-        </div>
+      <div className="content">
+        <Home/>
       </div>
     </div>
   );
