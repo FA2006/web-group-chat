@@ -1,36 +1,60 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
 * {
   margin: 0;
   font-family: "Quicksand";
   color: #333;
 }
-.navbar {
+
+.Navbar {
   display: flex;
-  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
   align-items: center;
   padding: 20px;
-  background-color: #333;
-  margin: 0 auto;
+  background-color: #0c0c0c;
   border-bottom: 1px solid white;
 }
 
-.navbar h1 {
-  color: hsl(0, 43%, 25%);
+.Navbar h1 {
+  color: hsl(0, 23%, 97%);
 }
 
-.navbar .links {
+.Navbar .Icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
   margin-left: auto;
 }
 
-.navbar a {
-  margin-left: auto;
-  text-decoration: none;
+.Navbar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 6px;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
 }
 
-.navgar .links a:hover {
+.Navbar .Icons svg {
+  color: #fff !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.Navbar button:hover,
+.Navbar button:focus-visible {
   color: #ddd;
+}
+
+.Navbar button:hover svg,
+.Navbar button:focus-visible svg {
+  color: #ddd !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
 }
 
 .content {
