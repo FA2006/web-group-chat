@@ -1,5 +1,6 @@
 import Navbar from './Navbar';
 import Home from './home';
+import TaskBar from './task-bar';
 
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <div className="content">
         <Home/>
       </div>
+      <TaskBar />
     </div>
   );
 }
