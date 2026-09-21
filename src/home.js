@@ -1,65 +1,95 @@
-import { FiSearch } from 'react-icons/fi';
 import { useState } from 'react';
+import { FiSearch, FiPlus } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import groups from './data/groups';
 
-const Home = () => {
+const categories = ['All', 'Sports', 'Tech', 'Comedy', 'Education', 'Business', 'music', 'health', 'gaming', 'movies', 'politics', 'news', 'travel', 'food', ];
 
-    const [groups] = useState([
-        { title: 'Group 1', body: 'This is the first group.', unread: 2, favorite: true, private: false, id: 1, image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80' },
-        { title: 'Group 2', body: 'This is the second group.', unread: 2, favorite: true, private: false, id: 2, image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80' },
-        { title: 'Group 3', body: 'This is the third group.', unread: 2, favorite: true, private: false, id: 3, image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80' },
-        { title: 'Group 4', body: 'This is the fourth group.', unread: 2, favorite: true, private: false, id: 4, image: 'https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?auto=format&fit=crop&w=900&q=80' },
-        { title: 'Group 5', body: 'This is the fifth group.', unread: 2, favorite: true, private: false, id: 5, image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80' },
-        { title: 'Group 6', body: 'This is the sixth group.', unread: 2, favorite: true, private: false, id: 6, image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80' },
-        { title: 'Group 7', body: 'This is the seventh group.', unread: 2, favorite: true, private: false, id: 7, image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80' },
-        { title: 'Group 8', body: 'This is the eighth group.', unread: 2, favorite: true, private: false, id: 8, image: 'https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?auto=format&fit=crop&w=900&q=80' }
-    ]);
+const Home = ({ onAddToTaskBar }) => {
+    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [searchQuery, setSearchQuery] = useState('');
 
-    const [selectedGroup, setSelectedGroup] = useState(groups[0]?.id ?? null);
+    const visibleGroups = groups.filter((group) => {
+        const matchesCategory = selectedCategory === 'All'
+            ? true
+            : group.category?.toLowerCase() === selectedCategory.toLowerCase();
 
-    return ( 
+        const text = `${group.title} ${group.category || ''}`.toLowerCase();
+        const matchesSearch = text.includes(searchQuery.trim().toLowerCase());
+
+        return matchesCategory && matchesSearch;
+    });
+
+    return (
         <div className="home">
 
+            {/* Search */}
             <div className="search-container">
-                <FiSearch className="search-icon" aria-hidden="true" />
+                <FiSearch className="search-icon" aria-hidden="true"/>
                 <input
                     type="search"
-                    placeholder="Ask Ai or Search..."
+                    placeholder="Ask AI or Search..."
                     className="search-input"
                     aria-label="Search"
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
                 />
             </div>
 
+            {/* Categories */}
             <div className="header-section">
-                <button type="button">all</button>
-                <button type="button">Sports</button>
-                <button type="button">Tech</button>
-                <button type="button">Comedy</button>
-                <button type="button">Education</button>
-                <button type="button">Business</button>
+                {categories.map((category) => (
+                    <button
+                        key={category}
+                        type="button"
+                        className={selectedCategory === category ? 'selected-category' : ''}
+                        aria-pressed={selectedCategory === category}
+                        onClick={() => setSelectedCategory(category)}>
+                        {category}
+                    </button>
+                ))}
                 <button type="button" aria-label="Add filter">+</button>
             </div>
 
             <h2>Home page</h2>
 
+            {/* Groups */}
             <div className="group-preview">
-                {groups.map((group) => (
-                    <button
-                        type="button"
-                        className={`group-card ${selectedGroup === group.id ? 'selected' : ''}`}
-                        key={group.id}
-                        onClick={() => setSelectedGroup(group.id)}
-                        style={{ backgroundImage: `linear-gradient(135deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url(${group.image})` }}
-                        aria-pressed={selectedGroup === group.id}
-                    >
+
+                {visibleGroups.map((group) => (
+                    <Link to={`/group/${group.id}`} className="group-card" key={group.id}
+                        style={{
+                            backgroundImage:
+                                `linear-gradient(
+                                    135deg,
+                                    rgba(0,0,0,0.45),
+                                    rgba(0,0,0,0.25)
+                                ),
+                                url(${group.image})`
+                        }}>
+                        <button
+                            type="button"
+                            className="group-card-add"
+                            aria-label={`Add ${group.title} to task bar`}
+                            onClick={(event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                onAddToTaskBar(group);
+                            }}>
+                            <FiPlus size={18} />
+                        </button>
+
                         <h3>{group.title}</h3>
                         <p>{group.body}</p>
                         <span>{group.unread} unread messages</span>
-                    </button>
+                        <p>{group.members}</p>
+                    </Link>
                 ))}
+                
             </div>
-
         </div>
-     );
-}
- 
+    );
+};
+
+
 export default Home;
