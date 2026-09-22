@@ -57,16 +57,31 @@ const Home = ({ onAddToTaskBar }) => {
             <div className="group-preview">
 
                 {visibleGroups.map((group) => (
-                    <Link to={`/group/${group.id}`} className="group-card" key={group.id}
-                        style={{
-                            backgroundImage:
-                                `linear-gradient(
-                                    135deg,
-                                    rgba(0,0,0,0.45),
-                                    rgba(0,0,0,0.25)
-                                ),
-                                url(${group.image})`
-                        }}>
+                    <Link
+                        to={`/group/${group.id}`}
+                        className="group-card"
+                        key={group.id}
+                        style={
+                            !group.video
+                                ? {
+                                    backgroundImage: `linear-gradient(
+                                        135deg,
+                                        rgba(0,0,0,0.45),
+                                        rgba(0,0,0,0.25)
+                                    ), url(${group.image})`
+                                }
+                                : undefined
+                        }>
+                        {group.video && (
+                            <video
+                                className="group-card-video"
+                                src={group.video}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline/>
+                        )}
+
                         <button
                             type="button"
                             className="group-card-add"

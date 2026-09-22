@@ -27,7 +27,15 @@ function AppContent() {
     });
   };
 
-  const handleRemoveTask = (taskId) => {
+  const handleRemoveTask = (taskIdOrGroup) => {
+    const taskId = typeof taskIdOrGroup === 'number'
+      ? taskIdOrGroup
+      : tasks.find((task) => task.groupId === taskIdOrGroup?.id)?.id;
+
+    if (taskId === undefined) {
+      return;
+    }
+
     setTasks((prevTasks) => {
       const remaining = prevTasks.filter((task) => task.id !== taskId);
 
@@ -55,7 +63,11 @@ function AppContent() {
 
           {/* Dynamic Group DM */}
           <Route path="/group/:groupId">
-            <GroupDM isTaskBarGroup={tasks.some((task) => task.groupId === Number(location.pathname.split('/').pop()))} />
+            <GroupDM
+              isTaskBarGroup={tasks.some((task) => task.groupId === Number(location.pathname.split('/').pop()))}
+              onAddToTaskBar={handleAddToTaskBar}
+              onRemoveTask={handleRemoveTask}
+            />
           </Route>
         </Switch>
       </div>

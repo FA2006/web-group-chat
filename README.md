@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Group Chat
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React single-page application for browsing discussion groups and opening lightweight group direct messages.
+
+## Features
+
+- Browse groups displayed as image-backed cards.
+- Filter groups by category or search by title and category.
+- Open a group at `/group/:groupId` using React Router.
+- Pin groups to the bottom task bar from the home page.
+- Send messages in pinned groups during the current session.
+- Remove pinned groups and switch between them from the task bar.
+- Responsive layout for desktop and mobile screens.
+
+## Requirements
+
+- Node.js 16 or newer
+- npm
+
+## Getting Started
+
+Install dependencies, then start the development server:
+
+```bash
+npm install
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) in a browser.
 
 ## Available Scripts
 
-In the project directory, you can run:
+| Command | Description |
+| --- | --- |
+| `npm start` | Starts the development server. |
+| `npm run build` | Creates an optimized production build in `build/`. |
+| `npm test` | Runs the test runner. |
+| `npm run eject` | Ejects Create React App configuration. This is irreversible. |
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```text
+src/
+├── App.js              # Router and application state
+├── GroupDM.js          # Group conversation view
+├── Navbar.js           # Home-page navigation and menu
+├── home.js             # Search, category filters, and group cards
+├── task-bar.js         # Pinned group navigation
+├── index.css           # Application styles
+├── index.js            # React entry point
+└── data/groups.js      # Local group and message seed data
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Data and Limitations
 
-### `npm test`
+Groups and initial messages are stored in `src/data/groups.js`. New messages and pinned groups are held in React state, so they are reset when the page is refreshed. There is currently no backend, authentication, persistence, or real-time messaging service.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Group card images are loaded from Unsplash URLs and require network access.
 
-### `npm run build`
+## Validation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Build the project before deployment:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm run build
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The repository currently does not contain automated test files, so `npm test` exits with a no-tests status until tests are added.
