@@ -1,5 +1,9 @@
 # Group Chat
 
+## Demo
+
+![Group Chat Demo](./assets/demo.gif)
+
 A React single-page application for browsing discussion groups and opening lightweight group direct messages.
 
 ## Features
