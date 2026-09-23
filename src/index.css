@@ -529,12 +529,14 @@
   justify-content: center;
   width: 18px;
   height: 18px;
-  background: rgba(17, 17, 17, 0.12);
+  background: white;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   z-index: 2;
   padding: 0;
+  border-radius: 25%;
+  
 }
 
 .task-icon {
