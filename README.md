@@ -1,10 +1,12 @@
 # Group Chat
 
+A React single-page application for browsing discussion groups and opening lightweight group direct messages.
+
 ## Demo
 
 ![Group Chat Demo](./assets/demo.gif)
 
-A React single-page application for browsing discussion groups and opening lightweight group direct messages.
+**[🚀 Try the Live Demo](https://web-group-chat.vercel.app)**
 
 ## Features
 
